@@ -43,7 +43,7 @@ namespace Hakimov_Autoservice
             if (_currentServise.DiscountInt < 0)
                 errors.AppendLine("Укажите скидку");
 
-            if (string.IsNullOrWhiteSpace(_currentServise.DurationInSeconds))
+            if (_currentServise.DurationInSeconds <= 0)
                 errors.AppendLine("Укажите длительность услуги");
             if (errors.Length > 0)
             {

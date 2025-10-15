@@ -11,7 +11,7 @@ namespace Hakimov_Autoservice
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Service
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,14 +20,16 @@ namespace Hakimov_Autoservice
             this.ClientService = new HashSet<ClientService>();
             this.ServicePhoto = new HashSet<ServicePhoto>();
         }
-    
+
         public int ID { get; set; }
         public string Title { get; set; }
         public string MainImagePath { get; set; }
-        public string DurationInSeconds { get; set; }
+        public int DurationInSeconds { get; set; }
         public decimal Cost { get; set; }
         public double Discount { get; set; }
-        public int DiscountInt { get
+        public int DiscountInt
+        {
+            get
             {
                 return (int)(Discount * 100);
             }
@@ -35,9 +37,9 @@ namespace Hakimov_Autoservice
             {
                 Discount = value / 100.0;
             }
-            }
+        }
         public string Description { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClientService> ClientService { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

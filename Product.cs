@@ -11,7 +11,7 @@ namespace Hakimov_Autoservice
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,7 +22,7 @@ namespace Hakimov_Autoservice
             this.Product1 = new HashSet<Product>();
             this.Product2 = new HashSet<Product>();
         }
-    
+
         public int ID { get; set; }
         public string Title { get; set; }
         public decimal Cost { get; set; }
@@ -30,7 +30,7 @@ namespace Hakimov_Autoservice
         public string MainImagePath { get; set; }
         public bool IsActive { get; set; }
         public Nullable<int> ManufacturerID { get; set; }
-    
+
         public virtual Manufacturer Manufacturer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductPhoto> ProductPhoto { get; set; }
