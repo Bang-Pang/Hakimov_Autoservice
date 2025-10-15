@@ -30,7 +30,11 @@ namespace Hakimov_Autoservice
         public int DiscountInt { get
             {
                 return (int)(Discount * 100);
-            } 
+            }
+            set
+            {
+                Discount = value / 100.0;
+            }
             }
         public string Description { get; set; }
     
