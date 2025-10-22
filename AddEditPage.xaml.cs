@@ -29,7 +29,6 @@ namespace Hakimov_Autoservice
                 _currentServise = SelectedService;
             DataContext = _currentServise;
         }
-
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             StringBuilder errors = new StringBuilder();
@@ -43,27 +42,42 @@ namespace Hakimov_Autoservice
             if (_currentServise.DiscountInt < 0)
                 errors.AppendLine("Укажите скидку");
 
-            if (_currentServise.DurationInSeconds <= 0)
-                errors.AppendLine("Укажите длительность услуги");
-            if (errors.Length > 0)
+            if (_currentServise.DurationInSeconds <= 0 || _currentServise.DurationInSeconds > 240)
+                errors.AppendLine("Длительность услуги не может быть больше 240 минут или меньше 0");
+            if (errors.Length > 0)//aegawergggggggggggggggg
             {
                 MessageBox.Show(errors.ToString());
                 return;
             }
 
-            if (_currentServise.ID == 0)
-                Хакимов_автосервисEntities.GetContext().Service.Add(_currentServise);
+            var allServices = Хакимов_автосервисEntities.GetContext().Service.ToList();
+            allServices = allServices.Where(p => p.Title == _currentServise.Title).ToList();
 
-            try
+            var context = Хакимов_автосервисEntities.GetContext();
+            bool duplicateExists = context.Service.Any(p => p.Title == _currentServise.Title && p.ID != _currentServise.ID);
+
+            if (allServices.Count == 0) 
             {
-                Хакимов_автосервисEntities.GetContext().SaveChanges();
-                MessageBox.Show("информация сохранена");
-                Manager.MainFrame.GoBack();
+                if (_currentServise.ID == 0)
+                    Хакимов_автосервисEntities.GetContext().Service.Add(_currentServise);
+                try
+                {
+                    Хакимов_автосервисEntities.GetContext().SaveChanges();
+                    MessageBox.Show("информация сохранена");
+                    Manager.MainFrame.GoBack();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message.ToString());
+                MessageBox.Show("Уже существует такая услуга");
             }
+
+           
         }
     }
 }

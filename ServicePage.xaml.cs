@@ -238,5 +238,10 @@ namespace Hakimov_Autoservice
                 ServiceListView.ItemsSource = Хакимов_автосервисEntities.GetContext().Service.ToList();
             }
         }
+
+        private void SignUpButton_Click(object sender, RoutedEventArgs e)
+        {
+            Manager.MainFrame.Navigate(new SignUpPage((sender as Button).DataContext as Service));
+        }
     }
 }
